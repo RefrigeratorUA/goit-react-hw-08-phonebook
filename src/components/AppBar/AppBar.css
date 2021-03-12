@@ -1,0 +1,18 @@
+.AppBar-wrapper {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: calc(100% - 40px);
+  min-height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow-x: hidden;
+}
+.AppBar-logo-appear {
+  transform: translateX(-100%);
+}
+.AppBar-logo-appear-active {
+  transform: translateX(0);
+  transition: all 500ms linear;
+}

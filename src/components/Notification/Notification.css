@@ -1,0 +1,35 @@
+.Notification-enter {
+  transform: translateX(100%);
+}
+.Notification-enter-active {
+  transform: translateX(0);
+  transition: all 250ms linear;
+}
+.Notification-exit {
+  transform: translateX(0);
+}
+.Notification-exit-active {
+  transform: translateX(100%);
+  transition: all 250ms linear;
+}
+.Notification-wrapper {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 100%;
+  max-width: calc(50% - 20px);
+  min-height: 40px;
+  overflow: hidden;
+}
+.alert {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 10px;
+  line-height: 40px;
+  text-align: center;
+  margin-left: auto;
+  background-color: #dc3545;
+  border-radius: 4px;
+  color: #fff;
+}
