@@ -1,0 +1,25 @@
+.NavClass {
+  margin-left: 20px;
+  padding-top: 5px;
+  text-transform: uppercase;
+}
+.NavClass a {
+  margin-right: 10px;
+  display: inline-block;
+  text-align: center;
+}
+.NavClass a:hover {
+  text-decoration: none;
+}
+.NavClass a:last-child {
+  margin-right: 0;
+}
+.NavLink {
+  font-size: 16px;
+  font-weight: 500;
+  color: rgba(0, 123, 255, 0.7);
+}
+.NavClass > .NavLink--active {
+  color: #28a745;
+  text-decoration: underline;
+}

@@ -11,12 +11,14 @@ import {
   fetchContactsRequest,
   fetchContactsSuccess,
   fetchContactsError,
+  clearErrorMessage,
 } from '../contacts';
 
 const itemsReducer = createReducer([], {
   [fetchContactsSuccess]: (_, { payload }) => payload,
   [addContactSuccess]: (state, { payload }) => [payload, ...state],
-  [deleteContactSuccess]: (state, { payload }) => state.filter(({ id }) => id !== Number(payload)),
+  [deleteContactSuccess]: (state, { payload }) =>
+    state.filter(({ id }) => id !== payload || Number(payload)),
 });
 
 const filterReducer = createReducer('', {
@@ -42,6 +44,7 @@ const errorReducer = createReducer(null, {
   [addContactError]: () => 'Ошибка записи контакта в БД',
   [deleteContactRequest]: () => '',
   [deleteContactError]: () => 'Ошибка удаления контакта из БД',
+  [clearErrorMessage]: () => null,
 });
 
 export default combineReducers({

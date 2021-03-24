@@ -39,16 +39,15 @@ class ContactForm extends Component {
 
   render() {
     const { name, number, errorMessage } = this.state;
-    const isShow = errorMessage ? true : false; // Консоль ругается, еслт CSSTransition in !== boolean
     return (
       <>
         <div className="Notification-wrapper">
-          <CSSTransition in={isShow} classNames="Notification" timeout={250} unmountOnExit>
+          <CSSTransition in={!!errorMessage} classNames="Notification" timeout={250} unmountOnExit>
             <Notification onView={this.showNotification} message={errorMessage} />
           </CSSTransition>
         </div>
 
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className="form-addContact">
           <label>
             Name
             <input
@@ -70,7 +69,11 @@ class ContactForm extends Component {
             ></input>
           </label>
           <br />
-          <button className="btn" type="submit" disabled={(!name && !number) || errorMessage}>
+          <button
+            className="btn-phonebook"
+            type="submit"
+            disabled={(!name && !number) || errorMessage}
+          >
             Add contact
           </button>
         </form>

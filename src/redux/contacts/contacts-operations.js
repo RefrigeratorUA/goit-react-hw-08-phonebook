@@ -9,9 +9,10 @@ import {
   fetchContactsRequest,
   fetchContactsSuccess,
   fetchContactsError,
+  clearErrorMessage,
 } from '../contacts';
 
-axios.defaults.baseURL = 'http://localhost:7777';
+// axios.defaults.baseURL = 'http://localhost:7777';
 
 const fetchContacts = () => async dispatch => {
   dispatch(fetchContactsRequest());
@@ -48,9 +49,14 @@ const deleteContact = id => async dispatch => {
   }
 };
 
+const onClearErrorMessage = () => dispatch => {
+  dispatch(clearErrorMessage());
+};
+
 // eslint-disable-next-line
 export default {
   fetchContacts,
   addContact,
   deleteContact,
+  onClearErrorMessage,
 };

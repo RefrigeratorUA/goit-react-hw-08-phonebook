@@ -4,7 +4,7 @@ import { filterContacts } from '../../redux/contacts';
 
 const Filter = ({ onFilterChange }) => {
   return (
-    <div>
+    <div className="filter">
       <p>Find contacts by name</p>
       <input className="input" type="text" onChange={onFilterChange}></input>
     </div>

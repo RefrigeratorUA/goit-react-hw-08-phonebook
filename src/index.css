@@ -1,7 +1,7 @@
 body {
   background-color: #ccc;
 }
-.btn {
+.btn-phonebook {
   display: inline-block;
   width: 100%;
   font-weight: 400;
@@ -23,46 +23,45 @@ body {
   background-color: #007bff;
   border-color: #007bff;
 }
-.btn:not(:disabled):not(.disabled) {
+.btn-phonebook:not(:disabled):not(.disabled) {
   cursor: pointer;
 }
-.btn:hover {
+.btn-phonebook:hover {
   color: #fff;
   background-color: #0069d9;
   border-color: #0062cc;
 }
-.btn:focus,
-.btn:hover {
+.btn-phonebook:focus,
+.btn-phonebook:hover {
   text-decoration: none;
 }
-.btn:focus {
+.btn-phonebook:focus {
   outline: none;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
-.btn:not(:disabled):not(.disabled).active:focus,
-.btn:not(:disabled):not(.disabled):active:focus,
-.show > .btn.dropdown-toggle:focus {
+.btn-phonebook:not(:disabled):not(.disabled).active:focus,
+.btn-phonebook:not(:disabled):not(.disabled):active:focus,
+.show > .btn-phonebook.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
-.btn:not(:disabled):not(.disabled).active,
-.btn:not(:disabled):not(.disabled):active,
-.show > .btn.dropdown-toggle {
+.btn-phonebook:not(:disabled):not(.disabled).active,
+.btn-phonebook:not(:disabled):not(.disabled):active,
+.show > .btn-phonebook.dropdown-toggle {
   color: #fff;
   background-color: #0062cc;
   border-color: #005cbf;
 }
-.btn:not(:disabled):not(.disabled).active,
-.btn:not(:disabled):not(.disabled):active {
+.btn-phonebook:not(:disabled):not(.disabled).active {
   background-image: none;
 }
-.btn.disabled,
-.btn:disabled {
+.btn-phonebook.disabled,
+.btn-phonebook:disabled {
   color: #fff;
   background-color: #007bff;
   border-color: #007bff;
 }
-.btn.disabled,
-.btn:disabled {
+.btn-phonebook.disabled,
+.btn-phonebook:disabled {
   opacity: 0.65;
 }
 
@@ -87,6 +86,7 @@ body {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 label {
+  display: block;
   font-size: 16px;
   font-weight: 500;
   line-height: 2;
@@ -150,4 +150,56 @@ label {
   margin: 20px;
   padding: 5px;
   font-size: 14px;
+}
+/* HW 8 */
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  min-height: 400px;
+  margin-top: 20px;
+  background: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    url('/src/images/homeview-image.png') no-repeat center center fixed;
+  background-size: cover;
+}
+.main h1 {
+  font-size: 32px;
+}
+.main span {
+  color: #0a519c;
+}
+.Auth-nav {
+  margin-left: auto;
+}
+.wrapper-spinner-bs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+}
+.wrapper-spinner-bs > .spinner-border {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 40px;
+}
+.wrapper-spinner-bs > .spinner-border:last-child {
+  margin-right: 0;
+}
+.filter {
+  margin-bottom: 20px;
+}
+.form-addContact {
+  margin-bottom: 20px;
+}
+.btn-phonebook--logout {
+  width: auto;
+  padding: 7px;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  background-color: rgba(0, 123, 255, 0.7);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
 }

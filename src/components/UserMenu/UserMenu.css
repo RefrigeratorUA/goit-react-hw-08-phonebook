@@ -1,0 +1,26 @@
+.UserMenu {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 3px;
+}
+.UserMenu * {
+  margin-right: 15px;
+}
+.UserMenu button {
+  margin-right: 0;
+}
+.UserMenu span {
+  font-weight: 500;
+  font-size: 16px;
+  color: #28a745;
+  font-weight: 700;
+  /* font-style: italic; */
+}
+.UserMenu span b {
+  font-style: normal;
+  font-weight: normal;
+  margin-right: 0;
+  color: #000;
+  font-size: 18px;
+}
