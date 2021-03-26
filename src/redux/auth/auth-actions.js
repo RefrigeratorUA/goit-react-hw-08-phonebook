@@ -16,6 +16,8 @@ const getCurrentUserRequest = createAction('auth/getCurrentUserRequest');
 const getCurrentUserSuccess = createAction('auth/getCurrentUserSuccess');
 const getCurrentUserError = createAction('auth/getCurrentUserError');
 
+const clearErrorMessage = createAction('auth/clearErrorMessage');
+
 // eslint-disable-next-line
 export default {
   registerRequest,
@@ -30,4 +32,5 @@ export default {
   getCurrentUserRequest,
   getCurrentUserSuccess,
   getCurrentUserError,
+  clearErrorMessage,
 };

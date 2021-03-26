@@ -70,10 +70,15 @@ const getCurrentUser = () => async (dispatch, getState) => {
   }
 };
 
+const onClearErrorMessage = () => dispatch => {
+  dispatch(authActions.clearErrorMessage());
+};
+
 // eslint-disable-next-line
 export default {
   register,
   login,
   logout,
   getCurrentUser,
+  onClearErrorMessage,
 };

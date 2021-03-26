@@ -18,10 +18,15 @@ const tokenReducer = createReducer(null, {
 });
 
 const errorReducer = createReducer(null, {
+  [authActions.registerRequest]: () => null,
   [authActions.registerError]: (_, { payload }) => payload,
+  [authActions.loginRequest]: () => null,
   [authActions.loginError]: (_, { payload }) => payload,
+  [authActions.logoutRequest]: () => null,
   [authActions.logoutError]: (_, { payload }) => payload,
+  [authActions.getCurrentUserRequest]: () => null,
   [authActions.getCurrentUserError]: (_, { payload }) => payload,
+  [authActions.clearErrorMessage]: () => null,
 });
 
 const isAuthReducer = createReducer(false, {
@@ -34,9 +39,19 @@ const isAuthReducer = createReducer(false, {
   [authActions.logoutSuccess]: () => false,
 });
 
+const isloadingAuthReducer = createReducer(false, {
+  [authActions.registerRequest]: () => true,
+  [authActions.registerSuccess]: () => false,
+  [authActions.registerError]: () => false,
+  [authActions.loginRequest]: () => true,
+  [authActions.loginSuccess]: () => false,
+  [authActions.loginError]: () => false,
+});
+
 export default combineReducers({
   user: userReducer,
   isAuth: isAuthReducer,
   token: tokenReducer,
   error: errorReducer,
+  isloadingAuth: isloadingAuthReducer,
 });

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import Notification from '../Notification';
 import '../Notification/Notification.css';
-import { authOperations } from '../../redux/auth';
+import { authOperations, authSelectors } from '../../redux/auth';
+import Loader from '../Loader';
 
 class RegistrationForm extends Component {
   state = {
@@ -12,6 +13,14 @@ class RegistrationForm extends Component {
     password: '',
     errorMessage: '',
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { error, onClearError } = this.props;
+    if (error) {
+      this.showNotification(error);
+      onClearError();
+    }
+  }
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -37,6 +46,7 @@ class RegistrationForm extends Component {
 
   render() {
     const { name, email, password, errorMessage } = this.state;
+    const { isAuthLoading } = this.props;
     return (
       <>
         <div className="Notification-wrapper">
@@ -45,46 +55,50 @@ class RegistrationForm extends Component {
           </CSSTransition>
         </div>
 
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Name
-            <input
-              className="input"
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <label>
-            Email
-            <input
-              className="input"
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <label>
-            Password
-            <input
-              className="input"
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <br />
-          <button
-            className="btn-phonebook"
-            type="submit"
-            disabled={(!name && !email && !password) || !!errorMessage}
-          >
-            Register
-          </button>
-        </form>
+        {isAuthLoading ? (
+          <Loader />
+        ) : (
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Name
+              <input
+                className="input"
+                type="text"
+                name="name"
+                value={name}
+                onChange={this.handleChange}
+              ></input>
+            </label>
+            <label>
+              Email
+              <input
+                className="input"
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              ></input>
+            </label>
+            <label>
+              Password
+              <input
+                className="input"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              ></input>
+            </label>
+            <br />
+            <button
+              className="btn-phonebook"
+              type="submit"
+              disabled={(!name && !email && !password) || !!errorMessage}
+            >
+              Register
+            </button>
+          </form>
+        )}
       </>
     );
   }
@@ -92,8 +106,14 @@ class RegistrationForm extends Component {
 
 // const mapStateToProps = state => ({ items: contactsSelectors.getAllContacts(state) });
 
+const mapStateToProps = state => ({
+  isAuthLoading: authSelectors.getAuthLoading(state),
+  error: authSelectors.getAuthError(state),
+});
+
 const mapDispatchToProps = {
   onRegister: authOperations.register,
+  onClearError: authOperations.onClearErrorMessage,
 };
 
-export default connect(null, mapDispatchToProps)(RegistrationForm);
+export default connect(mapStateToProps, mapDispatchToProps)(RegistrationForm);

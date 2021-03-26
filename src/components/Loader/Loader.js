@@ -1,25 +1,13 @@
-import PropTypes from 'prop-types';
-import LoaderSpinner from 'react-loader-spinner';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import { Spinner } from 'react-bootstrap';
 
-const Loader = ({ type = 'ThreeDots', color = '#000', className = 'loader' }) => {
+const Loader = ({ animation = 'border' }) => {
   return (
-    <LoaderSpinner
-      visible="true"
-      type={type}
-      color={color}
-      height={50}
-      width={50}
-      // timeout={3000} //3 secs
-      className={className}
-    />
+    <div className="wrapper-spinner-bs">
+      <Spinner animation={animation} variant="primary" />
+      <Spinner animation={animation} variant="success" />
+      <Spinner animation={animation} variant="danger" />
+    </div>
   );
-};
-
-Loader.propTypes = {
-  type: PropTypes.string,
-  color: PropTypes.string,
-  className: PropTypes.string,
 };
 
 export default Loader;

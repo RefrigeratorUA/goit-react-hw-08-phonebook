@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Filter from '../Filter';
-import { Spinner } from 'react-bootstrap';
 import Notification from '../Notification';
 import PhonebookListItem from '../PhonebookListItem';
 import { contactsSelectors, contactsOperations } from '../../redux/contacts';
 import styles from './PhonebookList.module.css';
+import Loader from '../Loader';
 
 class PhonebookList extends Component {
   componentDidMount() {
@@ -23,13 +23,7 @@ class PhonebookList extends Component {
             <Notification onView={onClearError} message={error} />
           </CSSTransition>
         </div>
-        {isLoading && (
-          <div className="wrapper-spinner-bs">
-            <Spinner animation="border" variant="primary" />
-            <Spinner animation="border" variant="success" />
-            <Spinner animation="border" variant="danger" />
-          </div>
-        )}
+        {isLoading && <Loader animation={'border'} />}
         {(contacts.length > 1 || filter) && <Filter />}
 
         <TransitionGroup component="ul" className="list">

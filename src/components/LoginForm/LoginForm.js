@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { CSSTransition } from 'react-transition-group';
 import Notification from '../Notification';
 import '../Notification/Notification.css';
-import { authOperations } from '../../redux/auth';
+import { authOperations, authSelectors } from '../../redux/auth';
+import Loader from '../Loader';
 
 class LoginForm extends Component {
   state = {
@@ -11,6 +12,14 @@ class LoginForm extends Component {
     password: '',
     errorMessage: '',
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { error, onClearError } = this.props;
+    if (error) {
+      this.showNotification(error);
+      onClearError();
+    }
+  }
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -35,6 +44,7 @@ class LoginForm extends Component {
 
   render() {
     const { email, password, errorMessage } = this.state;
+    const { isAuthLoading } = this.props;
     return (
       <>
         <div className="Notification-wrapper">
@@ -43,43 +53,53 @@ class LoginForm extends Component {
           </CSSTransition>
         </div>
 
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            Email
-            <input
-              className="input"
-              type="email"
-              name="email"
-              value={email}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <label>
-            Password
-            <input
-              className="input"
-              type="password"
-              name="password"
-              value={password}
-              onChange={this.handleChange}
-            ></input>
-          </label>
-          <br />
-          <button
-            className="btn-phonebook"
-            type="submit"
-            disabled={(!email && !password) || !!errorMessage}
-          >
-            Login
-          </button>
-        </form>
+        {isAuthLoading ? (
+          <Loader />
+        ) : (
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              Email
+              <input
+                className="input"
+                type="email"
+                name="email"
+                value={email}
+                onChange={this.handleChange}
+              ></input>
+            </label>
+            <label>
+              Password
+              <input
+                className="input"
+                type="password"
+                name="password"
+                value={password}
+                onChange={this.handleChange}
+              ></input>
+            </label>
+            <br />
+            <button
+              className="btn-phonebook"
+              type="submit"
+              disabled={(!email && !password) || !!errorMessage}
+            >
+              Login
+            </button>
+          </form>
+        )}
       </>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  isAuthLoading: authSelectors.getAuthLoading(state),
+  error: authSelectors.getAuthError(state),
+});
+
 const mapDispatchToProps = {
   onLogin: authOperations.login,
+  onClearError: authOperations.onClearErrorMessage,
 };
 
-export default connect(null, mapDispatchToProps)(LoginForm);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

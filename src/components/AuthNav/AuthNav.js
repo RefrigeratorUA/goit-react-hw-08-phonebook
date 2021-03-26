@@ -5,22 +5,22 @@ import './AuthNav.css';
 const AuthNav = () => {
   return (
     <nav className="AuthNavStyle">
-      <NavLink
-        exact
-        to={routes.register}
-        className="AuthNavStyle-link"
-        activeClassName="AuthNavStyle-link--active"
-      >
-        Register
-      </NavLink>
-      <NavLink
-        exact
-        to={routes.login}
-        className="AuthNavStyle-link"
-        activeClassName="AuthNavStyle-link--active"
-      >
-        Login
-      </NavLink>
+      {routes.map(route => {
+        const { path, name, showInNav } = route;
+        return (
+          !showInNav && (
+            <NavLink
+              exact
+              key={name}
+              to={path}
+              className="AuthNavStyle-link"
+              activeClassName="AuthNavStyle-link--active"
+            >
+              {name}
+            </NavLink>
+          )
+        );
+      })}
     </nav>
   );
 };

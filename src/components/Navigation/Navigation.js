@@ -6,14 +6,23 @@ import routes from '../../routes';
 const Navigation = ({ isAuth }) => {
   return (
     <nav className="NavClass">
-      <NavLink exact to={routes.home} className="NavLink" activeClassName="NavLink--active">
-        Home
-      </NavLink>
-      {isAuth && (
-        <NavLink to={routes.contacts} className="NavLink" activeClassName="NavLink--active">
-          Contacts
-        </NavLink>
-      )}
+      {routes.map(route => {
+        const { name, path, showInNav, privat } = route;
+        return (
+          showInNav &&
+          (!privat || (isAuth && privat)) && (
+            <NavLink
+              key={name}
+              exact
+              to={path}
+              className="NavLink"
+              activeClassName="NavLink--active"
+            >
+              {name}
+            </NavLink>
+          )
+        );
+      })}
     </nav>
   );
 };
